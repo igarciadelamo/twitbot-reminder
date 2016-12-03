@@ -1,0 +1,8 @@
+[
+  {
+    "consumer-api": "test-consumer-api",
+    "consumer-secret": "test-consumer-secret",
+    "access-token": "test-access-token",
+    "access-token-secret": "test-access-token-secret"
+  }
+]
