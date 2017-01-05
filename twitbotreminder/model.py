@@ -2,8 +2,8 @@ class Properties:
     def __init__(self, json):
         self.consumer_key = json["connection"]["consumer-key"]
         self.consumer_secret = json["connection"]["consumer-secret"]
-        self.access_token = json["connection"]["access-token"]
-        self.access_token_secret = json["connection"]["access-token-secret"]
+        self.token = json["connection"]["access-token"]
+        self.token_secret = json["connection"]["access-token-secret"]
         self.me = json["me"]
         self.greeting = json["greeting"]
 
@@ -21,7 +21,7 @@ class ReminderList:
         for item in self.list:
             if item.month == month and item.dayOfMonth == dayOfMonth: yield item
 
-class InputBot(object):
+class InputBot:
   def __init__(self, properties, reminders):
      self.properties_file = properties
      self.reminders_file = reminders

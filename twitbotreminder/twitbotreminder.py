@@ -11,39 +11,25 @@ from twitbotreminder.model import ReminderList, Properties, InputBot
 class TwitterConnector:
     def __init__(self, properties):
         self.properties = properties
-
         self.twitter = None
-        # Create locks for these instances, so they won't be accessed at the
-        # same time by different threads.
-        #self._tlock = Lock()
-
-        # Create a Boolean that indicates whether the bot is logged in
-        self.loggedin = False
-
-    #def start(self):
-    #    self.thread = Thread(target=self._execute)
-    #    self.thread.daemon = True
-    #    self.thread.name = 'TwitbotThread'
-    #    self.thread.start()
+        self.connected = False
 
     def connect(self):
-
-        # Log in to a Twitter account
-        self.oauth = twitter.OAuth(self.properties.access_token, self.properties.access_token_secret, \
-                                    self.properties.consumer_key, self.properties.consumer_secret)
+        self.oauth = twitter.OAuth(self.properties.token,  \
+                                   self.properties.token_secret, \
+                                   self.properties.consumer_key,  \
+                                   self.properties.consumer_secret)
         self.twitter = twitter.Twitter(auth=self.oauth)
-        self.loggedin = True
+        self.connected = True
 
     def disconnect(self):
-           self.loggedin = False
-           #self.thread._stop()
+           self.connected = False
 
     def execute(self, reminders):
-        if self.loggedin:
-
-            now = datetime.datetime.now()
-            for reminder in self.reminders:
+        if self.connected:
+            for reminder in reminders:
                 text = self.properties.greeting + " @" + self.properties.me + "! " + reminder.text
+                print("DEBUG: Tweet to send: " + text);
                 self._try_post_tweet(text)
 
     def _twit(self, text):
@@ -115,19 +101,18 @@ class TwitbotReminder:
             time.sleep(5)
             while True:
 
-                reminders = self.load_reminders();
                 now = datetime.datetime.now()
                 print("INFO: Processing reminders for date %s" % now)
                 reminders = self.load_reminders()
-                print("INFO: Filtering reminders #%d" % len(reminders))
-                if len(reminders) == 0:
-                    connector.execute(reminders.search_by_date(now.day, now.month))
+                current_reminders = reminders.search_by_date(now.day, now.month)
+                connector.execute(current_reminders)
 
                 # Sleep iteration
-                time.sleep(20)
+                secondsPerDay = 24 * 60 * 60
+                time.sleep(secondsPerDay)
 
-        except:
-            print("ERROR: The twitter connection properties are not correct. Review the config files'")
+        except Exception as e:
+            print("ERROR: An exception happened caused by: %s" % e)
             connector.disconnect()
             sys.exit(-1)
 

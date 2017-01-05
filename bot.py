@@ -4,13 +4,16 @@ import getopt
 from twitbotreminder import TwitbotReminder
 from twitbotreminder.model import InputBot
 
-HELP_TEXT = "bot.py -c <config_file> -r <reminder_file>"
+HELP_TEXT = "bot.py -c <config_path>"
+PROPERTIES_FILE = "/properties.json"
+REMINDERS_FILE = "/reminders.json"
+FOLDER = "sample"
 
 def read_configuration(argv):
     try:
-        opts, args = getopt.getopt(argv,"hp:r:",["properties=","reminders="])
-        properties_file = "sample/properties-sample.json"
-        reminders_file = "sample/reminders-sample.json"
+        opts, args = getopt.getopt(argv,"hc:",["config="])
+        folder = FOLDER
+
     except getopt.GetoptError:
         print (HELP_TEXT)
         sys.exit(2)
@@ -19,12 +22,10 @@ def read_configuration(argv):
         if opt == '-h':
             print (HELP_TEXT)
             sys.exit(0)
-        elif opt in ("-p", "--properties"):
-            properties_file = arg
-        elif opt in ("-r", "--reminder"):
-            reminders_file = arg
+        elif opt in ['-c', '--config']:
+            folder = arg
 
-    return InputBot(properties_file, reminders_file)
+    return InputBot(folder + PROPERTIES_FILE, folder + REMINDERS_FILE)
 
 
 if __name__ == "__main__":
