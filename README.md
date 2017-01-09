@@ -19,11 +19,56 @@ Save the following fields:
 * Access Token
 * Access Token Secret
 
+The bot can publish the tweets through the account that created the application.
+
 ## Installation
 
-The "twitter" package is required.
+The Python package "twitter" is required.
 
-This project has been tested using Python2 and Python3.
+This project has been tested using Python3.
 
-##
+## Execution
+
+Create your own reminders. Currently, the remidners must be in a a json file. In the folder sample, you can find an example (reminders.json).
+
+The format for each reminder is:
+
+```json
+ {
+    "month": numeric from 1 (January) to 12 (December),
+    "dayOfMonth": numeric from 1 to 31,
+    "text": text with the message to tweet
+ }
+```
+
+Change the config file (properties.json), with the twitter credentials and your twitter nickname.
+
+```json
+ {
+   "connection": {
+     "consumer-key": text with the consumer-key,
+     "consumer-secret": text with the consumer-secret,
+     "access-token": text with the access-token,
+     "access-token-secret": text with the access-token-secret
+   },
+   "me": text with ypur nickname (with no '@' at the begining)
+   "greeting" : text with the greeting.
+ }
+```
+
+Each post will be composed by the greeting, the mention to you, and the text of the reminder.
+
+To run the bot:
+
+> python3 bot.py -c _config_
+
+where _config_ is the folder containing reminders.json and properties.json (sample is the default folder)
+
+## Next steps
+
+* Store the reminders in a database.
+* Store the published tweets to avoid duplicates.
+* Answer to mentions with new tweets.
+
+
 
