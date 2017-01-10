@@ -46,13 +46,13 @@ Change the config file (properties.json), with your twitter credentials and your
 ```json
  {
    "connection": {
-     "consumer-key": text with the consumer-key,
-     "consumer-secret": text with the consumer-secret,
-     "access-token": text with the access-token,
-     "access-token-secret": text with the access-token-secret
+     "consumer-key": "text with the consumer-key",
+     "consumer-secret": "text with the consumer-secret",
+     "access-token": "text with the access-token",
+     "access-token-secret": "text with the access-token-secret"
    },
-   "me": text with your nickname (with no '@' at the begining)
-   "greeting" : text with the greeting.
+   "me": "text with your nickname (with no '@' at the begining)"
+   "greeting" : "text with the greeting."
  }
 ```
 
