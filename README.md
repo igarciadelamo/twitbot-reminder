@@ -1,14 +1,14 @@
 # twitbot-reminder
 
-Twitbot written in Python to twit preconfigured reminders.
+Twitbot written in Python in order to twit preconfigured reminders.
 
 ## Why?
 
-The main reason is using Python in a personal project and the Twitter API.
+The main reason is to use Python in a personal project and the Twitter API.
 
 ## Previous steps
 
-It is necessary to create a twitter application, with its own oauth credentials. So, the application can post tweets by itself.
+It is necessary to create a twitter application, with its own oauth credentials. This way, the application can post tweets by itself.
 
 In the link apps.twitter.com, you can create a new app. After creating the app, go to the the access tokens.
 
@@ -25,7 +25,7 @@ The bot can publish the tweets through the account that created the application.
 
 The Python package "twitter" is required.
 
-This project has been tested using Python3.
+This project has been developed and tested using Python3.
 
 ## Execution
 
@@ -41,7 +41,7 @@ The format for each reminder is:
  }
 ```
 
-Change the config file (properties.json), with the twitter credentials and your twitter nickname.
+Change the config file (properties.json), with your twitter credentials and your twitter nickname.
 
 ```json
  {
@@ -51,7 +51,7 @@ Change the config file (properties.json), with the twitter credentials and your 
      "access-token": text with the access-token,
      "access-token-secret": text with the access-token-secret
    },
-   "me": text with ypur nickname (with no '@' at the begining)
+   "me": text with your nickname (with no '@' at the begining)
    "greeting" : text with the greeting.
  }
 ```
