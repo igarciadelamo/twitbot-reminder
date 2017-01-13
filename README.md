@@ -33,7 +33,7 @@ Create your own reminders. Currently, the remidners must be in a a json file. In
 
 The format for each reminder is:
 
-```json
+```
  {
     "month": numeric from 1 (January) to 12 (December),
     "dayOfMonth": numeric from 1 to 31,
@@ -43,7 +43,7 @@ The format for each reminder is:
 
 Change the config file (properties.json), with your twitter credentials and your twitter nickname.
 
-```json
+```
  {
    "connection": {
      "consumer-key": "text with the consumer-key",
@@ -52,7 +52,7 @@ Change the config file (properties.json), with your twitter credentials and your
      "access-token-secret": "text with the access-token-secret"
    },
    "me": "text with your nickname (with no '@' at the begining)"
-   "greeting" : "text with the greeting."
+   "greeting": "text with the greeting."
  }
 ```
 
