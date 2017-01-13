@@ -60,9 +60,10 @@ Each post will be composed by the greeting, the mention to you, and the text of 
 
 To run the bot:
 
-> python3 bot.py -c _config_
+> python3 bot.py -c _config_ -l _logdir_
 
 where _config_ is the folder containing reminders.json and properties.json (sample is the default folder)
+and _logdir_ is the directory where the logs
 
 ## Next steps
 
