@@ -65,6 +65,10 @@ To run the bot:
 where _config_ is the folder containing reminders.json and properties.json (sample is the default folder)
 and _logdir_ is the directory where the logs
 
+## Versions
+
+* Tag 0.1.0: Initial version
+
 ## Next steps
 
 * Store the reminders in a database.
