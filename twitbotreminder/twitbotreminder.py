@@ -3,10 +3,16 @@ import sys
 import json
 import os
 import datetime
+from urllib.error import URLError
+
 import twitter
 import logging
 
 from twitbotreminder.model import ReminderList, Properties, InputBot
+
+MAX_ATTEMPTS = 5
+EXECUTION_TIME = 24 * 60 * 60
+RECONNECTION_TIME = 10 * 60
 
 
 class TwitterConnector:
@@ -39,26 +45,31 @@ class TwitterConnector:
         if self.connected:
             for reminder in reminders:
                 text = self.properties.greeting + " @" + self.properties.me + "! " + reminder.text
-                self._try_post_tweet(text)
+                self._try_post_tweet(text, 1)
 
-    def _twit(self, text):
+    def _tweet(self, text):
         self.twitter.statuses.update(status=text)
-        self._logger.info("New twit posted: %s" % text)
+        self._logger.info("New tweet posted: %s" % text)
 
-    def _try_post_tweet(self, new_tweet):
+    def _try_post_tweet(self, new_tweet, attempt):
         try:
-            self._twit(new_tweet)
+            self._tweet(new_tweet)
 
-        except:
-            self.connect()
-            # Try to post again.
-            try:
-                self._twit(new_tweet)
-
-            except Exception as e:
-                self._logger.error("Error posting twit due to: %s" % (e))
+        except URLError as e:
+            self._logger.error("Error in the http connection: %s" % (e))
+            if attempt == MAX_ATTEMPTS:
+                self._logger.error("Maximum number of attempts reached.")
                 sys.exit(-1)
 
+            # Sleep until next reconnection
+            time.sleep(RECONNECTION_TIME)
+            # Try to post again.
+            self.connect()
+            self._try_post_tweet(new_tweet, attempt+1)
+
+        except Exception as e:
+            self._logger.error("Unexpected error posting tweet: %s" % (e))
+            sys.exit(-1)
 
 
 class TwitbotReminder:
@@ -121,8 +132,7 @@ class TwitbotReminder:
                 connector.execute(current_reminders)
 
                 # Sleep iteration
-                secondsPerDay = 24 * 60 * 60
-                time.sleep(secondsPerDay)
+                time.sleep(EXECUTION_TIME)
 
         except Exception as e:
             self.logger.error("An exception happened caused by: %s" % e)
