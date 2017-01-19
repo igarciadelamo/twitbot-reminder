@@ -73,6 +73,7 @@ and _logdir_ is the directory where the logs
 
 * Store the reminders in a database.
 * Store the published tweets to avoid duplicates.
+* Try to reconnect to Twitter after a period of time if there is no connection
 * Answer to mentions with new tweets.
 
 
