@@ -27,6 +27,12 @@ The Python package "twitter" is required.
 
 This project has been developed and tested using Python3.
 
+## Tests
+
+To run all the tests:
+
+> python3 -m unittest discover
+
 ## Execution
 
 Create your own reminders. Currently, the remidners must be in a a json file. In the folder sample, you can find an example (reminders.json).

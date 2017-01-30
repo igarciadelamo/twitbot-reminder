@@ -5,11 +5,6 @@
     "text": "Soy el bot! Estoy funcionando por primera vez!"
   },
   {
-    "month" : 11,
-    "dayOfMonth" : 13,
-    "text" : "Mañana es tu cumpleaños, comprate algo!"
-  },
-  {
     "month": 11,
     "dayOfMonth": 14,
     "text": "Felicidades de parte de tu bot! Nos hacemos viejunos! Seguro que no recordabas que estoy conectado!"

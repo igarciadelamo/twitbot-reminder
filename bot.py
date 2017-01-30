@@ -1,7 +1,7 @@
 import sys
 import getopt
 
-from twitbotreminder import TwitbotReminder
+from twitbotreminder.twitbotreminder import TwitbotReminder
 from twitbotreminder.model import InputBot
 
 HELP_TEXT = "bot.py -c <config_path> -l <log_dir>"

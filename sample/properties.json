@@ -5,6 +5,6 @@
     "access-token": "test-access-token",
     "access-token-secret": "test-access-token-secret"
   },
-  "me": "igarciadelamo",
+  "me": "my_twitter_username",
   "greeting" : "Hola"
 }

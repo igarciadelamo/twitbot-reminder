@@ -79,7 +79,6 @@ class TwitbotReminder:
         self.reminders_file = input_bot.reminders_file
         self.load_files = True
 
-
     def load_properties(self):
         properties = None
         self.logger.info("Twitbot loading config from file %s" % self.properties_file)
@@ -91,9 +90,10 @@ class TwitbotReminder:
                     self.logger.info("Twitbot has loaded config successfully")
 
             except KeyError as e:
-                self.logger.error("ERROR: Twitbot could NOT read expected config from file :: %s" % str(e))
+                self.logger.error("Twitbot could NOT read expected config from file :: %s" % str(e))
                 self.load_files = False
         else:
+            self.logger.error("Twitbot could NOT find property file : %s" % self.properties_file)
             self.load_files = False
 
         return properties
@@ -107,6 +107,7 @@ class TwitbotReminder:
                 reminders = ReminderList(data)
                 self.logger.info("Twitbot file with reminders #%d" % len(reminders.list))
         else:
+            self.logger.error("Twitbot could NOT find reminder file : %s" % self.reminders_file)
             self.load_files = False
 
         return reminders
@@ -145,10 +146,10 @@ class TwibotLogger:
     @staticmethod
     def getLogger(filename):
         logger = logging.getLogger("twitbot-reminder")
-        hdlr = logging.FileHandler(filename)
         formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-        hdlr.setFormatter(formatter)
-        logger.addHandler(hdlr)
+        handler = logging.FileHandler(filename)
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
         logger.setLevel(logging.DEBUG)
         return logger
 
