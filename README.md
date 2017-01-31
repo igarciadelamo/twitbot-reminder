@@ -75,7 +75,7 @@ and _logdir_ is the directory where the logs
 
 * Tag 0.1.0: Initial version
 
-* Next version: 0.2.0
+* Tag 0.2.0: 
  * Unit testing
  * Logs stored in a configurable directory
  * Reconnection to Twitter after a period of time if there is no connection
