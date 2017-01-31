@@ -80,6 +80,7 @@ and _logdir_ is the directory where the logs
  * Logs stored in a configurable directory
  * Reconnection to Twitter after a period of time if there is no connection
 
+* Next version: 0.3.0 
 
 ## Next steps
 
