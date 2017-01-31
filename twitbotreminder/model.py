@@ -22,6 +22,7 @@ class ReminderList:
             if item.month == month and item.dayOfMonth == dayOfMonth: yield item
 
 class InputBot:
-  def __init__(self, properties, reminders):
+  def __init__(self, properties, reminders, logs):
      self.properties_file = properties
      self.reminders_file = reminders
+     self.logs_file = logs

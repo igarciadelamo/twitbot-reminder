@@ -27,13 +27,19 @@ The Python package "twitter" is required.
 
 This project has been developed and tested using Python3.
 
+## Tests
+
+To run all the tests:
+
+> python3 -m unittest discover
+
 ## Execution
 
 Create your own reminders. Currently, the remidners must be in a a json file. In the folder sample, you can find an example (reminders.json).
 
 The format for each reminder is:
 
-```json
+```
  {
     "month": numeric from 1 (January) to 12 (December),
     "dayOfMonth": numeric from 1 to 31,
@@ -43,7 +49,7 @@ The format for each reminder is:
 
 Change the config file (properties.json), with your twitter credentials and your twitter nickname.
 
-```json
+```
  {
    "connection": {
      "consumer-key": "text with the consumer-key",
@@ -52,7 +58,7 @@ Change the config file (properties.json), with your twitter credentials and your
      "access-token-secret": "text with the access-token-secret"
    },
    "me": "text with your nickname (with no '@' at the begining)"
-   "greeting" : "text with the greeting."
+   "greeting": "text with the greeting."
  }
 ```
 
@@ -60,13 +66,24 @@ Each post will be composed by the greeting, the mention to you, and the text of 
 
 To run the bot:
 
-> python3 bot.py -c _config_
+> python3 bot.py -c _config_ -l _logdir_
 
 where _config_ is the folder containing reminders.json and properties.json (sample is the default folder)
+and _logdir_ is the directory where the logs
+
+## Versions
+
+* Tag 0.1.0: Initial version
+
+* Next version: 0.2.0
+ * Unit testing
+ * Logs stored in a configurable directory
+ * Reconnection to Twitter after a period of time if there is no connection
+
 
 ## Next steps
 
-* Store the reminders in a database.
+* Use a database to store the reminders.
 * Store the published tweets to avoid duplicates.
 * Answer to mentions with new tweets.
 
