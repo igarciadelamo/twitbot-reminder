@@ -75,11 +75,16 @@ and _logdir_ is the directory where the logs
 
 * Tag 0.1.0: Initial version
 
+* Next version: 0.2.0
+ * Unit testing
+ * Logs stored in a configurable directory
+ * Reconnection to Twitter after a period of time if there is no connection
+
+
 ## Next steps
 
-* Store the reminders in a database.
+* Use a database to store the reminders.
 * Store the published tweets to avoid duplicates.
-* Try to reconnect to Twitter after a period of time if there is no connection
 * Answer to mentions with new tweets.
 
 
