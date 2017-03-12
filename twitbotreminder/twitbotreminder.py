@@ -51,7 +51,7 @@ class TwitterConnector:
     def execute(self, reminders):
         if self.connected:
             for reminder in reminders:
-                text = self.compose_text(reminder.text)
+                text = self._compose_text(reminder.text)
                 self._try_post_tweet(text, 1)
 
     def _compose_text(self, text):
