@@ -7,5 +7,5 @@
   },
   "me": "my_twitter_username",
   "greeting" : "Hi",
-  "welcome_text": "This is my first message"
+  "welcome-text": "This is my first message"
 }
