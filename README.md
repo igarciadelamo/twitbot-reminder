@@ -23,7 +23,7 @@ The bot can publish the tweets through the account that created the application.
 
 ## Installation
 
-The Python package "twitter" is required.
+The Python package "tweepy" is required.
 
 This project has been developed and tested using Python3.
 

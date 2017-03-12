@@ -5,7 +5,7 @@ import os
 import datetime
 from urllib.error import URLError
 
-import twitter
+import tweepy
 import logging
 
 from twitbotreminder.model import ReminderList, Properties, InputBot
@@ -31,21 +31,31 @@ class TwitterConnector:
         self._logger = value
 
     def connect(self):
-        self.oauth = twitter.OAuth(self.properties.token,  \
-                                   self.properties.token_secret, \
-                                   self.properties.consumer_key,  \
-                                   self.properties.consumer_secret)
-        self.twitter = twitter.Twitter(auth=self.oauth)
+        auth = tweepy.OAuthHandler(self.properties.consumer_key, self.properties.consumer_secret)
+        auth.set_access_token(self.properties.token,  self.properties.token_secret)
+        self.twitter = tweepy.API(auth)
         self.connected = True
 
     def disconnect(self):
-           self.connected = False
+        self.connected = False
+
+    def check_previous_tweets(self):
+        self._logger.info("Checking last published tweet... ")
+        timeline = self.twitter.user_timeline(count=1)
+        tweet = next(iter(timeline or []), None)
+        if(tweet is not None):
+            self._logger.info("Last published tweet at %s with text %s" % (tweet.created_at,tweet.text))
+        else:
+            self._tweet(self, self._compose_text(self.properties.welcome_text))
 
     def execute(self, reminders):
         if self.connected:
             for reminder in reminders:
-                text = self.properties.greeting + " @" + self.properties.me + "! " + reminder.text
+                text = self.compose_text(reminder.text)
                 self._try_post_tweet(text, 1)
+
+    def _compose_text(self, text):
+        return  self.properties.greeting + " @" + self.properties.me + "! " + text
 
     def _tweet(self, text):
         self.twitter.statuses.update(status=text)
@@ -124,6 +134,9 @@ class TwitbotReminder:
             connector.logger = self.logger
             connector.connect()
             time.sleep(5)
+
+            connector.check_previous_tweets()
+
             while True:
 
                 now = datetime.datetime.now()

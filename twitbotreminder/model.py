@@ -6,6 +6,7 @@ class Properties:
         self.token_secret = json["connection"]["access-token-secret"]
         self.me = json["me"]
         self.greeting = json["greeting"]
+        self.welcome_text = json["welcome_text"]
 
 class Reminder:
     def __init__(self, json):
