@@ -20,10 +20,12 @@ class TwitbotReminderCase(unittest.TestCase):
         self.assertEqual(reminder.load_files, True)
         self.assertEqual(properties.consumer_key, "test-consumer-key")
         self.assertEqual(properties.consumer_secret, "test-consumer-secret")
-        self.assertEqual(properties.greeting, "Hola")
+        self.assertEqual(properties.greeting, "Hi")
         self.assertEqual(properties.me, "my_twitter_username")
         self.assertEqual(properties.token, "test-access-token")
         self.assertEqual(properties.token_secret, "test-access-token-secret")
+        self.assertEqual(properties.welcome_text, "This is my first message")
+
 
     def test_load_properties_with_wrong_file(self):
         reminder = self.create_twitbot_reminder(FAKE_FILE, REMINDERS_FILE)
