@@ -58,7 +58,7 @@ class TwitterConnector:
         return  self.properties.greeting + " @" + self.properties.me + "! " + text
 
     def _tweet(self, text):
-        self.twitter.statuses.update(status=text)
+        self.twitter.update_status(status=text)
         self._logger.info("New tweet posted: %s" % text)
 
     def _try_post_tweet(self, new_tweet, attempt):
