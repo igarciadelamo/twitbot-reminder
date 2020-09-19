@@ -49,9 +49,12 @@ class TwitterConnector:
 
     def execute(self, reminders):
         if self.connected:
+            count = 0
             for reminder in reminders:
                 text = self._compose_text(reminder.text)
                 self._try_post_tweet(text, 1)
+                count += count
+            self.logger.info("Processed %s reminder(s) today" % count)
 
     def _compose_text(self, text):
         return self.properties.greeting + " @" + self.properties.me + "! " + text
