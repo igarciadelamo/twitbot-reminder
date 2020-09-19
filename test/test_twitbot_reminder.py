@@ -1,9 +1,8 @@
-import unittest
 import logging
+import unittest
 from unittest.mock import Mock
 
-
-from twitbotreminder.model import InputBot, Properties
+from twitbotreminder.model import InputBot
 from twitbotreminder.twitbotreminder import TwitbotReminder, TwitterConnector
 
 FAKE_FILE = "does_not_exist.json"
@@ -25,7 +24,6 @@ class TwitbotReminderCase(unittest.TestCase):
         self.assertEqual(properties.token, "test-access-token")
         self.assertEqual(properties.token_secret, "test-access-token-secret")
         self.assertEqual(properties.welcome_text, "This is my first message")
-
 
     def test_load_properties_with_wrong_file(self):
         reminder = self.create_twitbot_reminder(FAKE_FILE, REMINDERS_FILE)
@@ -69,7 +67,6 @@ class TwitterConnectorCase(unittest.TestCase):
 
     def create_twitter_connector(self, properties):
         return TwitterConnector(properties)
-
 
 
 def create_logger():

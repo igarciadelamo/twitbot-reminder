@@ -8,11 +8,13 @@ class Properties:
         self.greeting = json["greeting"]
         self.welcome_text = json["welcome-text"]
 
+
 class Reminder:
     def __init__(self, json):
         self.month = json["month"]
         self.dayOfMonth = json["dayOfMonth"]
         self.text = json["text"]
+
 
 class ReminderList:
     def __init__(self, json):
@@ -22,8 +24,9 @@ class ReminderList:
         for item in self.list:
             if item.month == month and item.dayOfMonth == dayOfMonth: yield item
 
+
 class InputBot:
-  def __init__(self, properties, reminders, logs):
-     self.properties_file = properties
-     self.reminders_file = reminders
-     self.logs_file = logs
+    def __init__(self, properties, reminders, logs):
+        self.properties_file = properties
+        self.reminders_file = reminders
+        self.logs_file = logs

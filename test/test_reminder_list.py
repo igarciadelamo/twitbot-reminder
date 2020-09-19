@@ -14,7 +14,7 @@ class ReminderListCase(unittest.TestCase):
 
     def test_search_by_date_with_results(self):
         reminder_list = create_reminder_list(3)
-        filtered = reminder_list.search_by_date(1,3)
+        filtered = reminder_list.search_by_date(1, 3)
         self.assertEqual(1, len(list(filtered)))
 
     def test_search_by_date_with_no_results(self):

@@ -1,17 +1,16 @@
-import time
-import sys
-import json
-import os
 import datetime
+import json
+import logging
+import os
+import sys
+import time
 from urllib.error import URLError
 
 import tweepy
-import logging
 
 from twitbotreminder.model import ReminderList, Properties, InputBot
 
 MAX_ATTEMPTS = 5
-EXECUTION_TIME = 24 * 60 * 60
 RECONNECTION_TIME = 10 * 60
 
 
@@ -32,7 +31,7 @@ class TwitterConnector:
 
     def connect(self):
         auth = tweepy.OAuthHandler(self.properties.consumer_key, self.properties.consumer_secret)
-        auth.set_access_token(self.properties.token,  self.properties.token_secret)
+        auth.set_access_token(self.properties.token, self.properties.token_secret)
         self.twitter = tweepy.API(auth)
         self.connected = True
 
@@ -43,8 +42,8 @@ class TwitterConnector:
         self._logger.info("Checking last published tweet... ")
         timeline = self.twitter.user_timeline(count=1)
         tweet = next(iter(timeline or []), None)
-        if(tweet is not None):
-            self._logger.info("Last published tweet at %s with text %s" % (tweet.created_at,tweet.text))
+        if tweet is not None:
+            self._logger.info("Last published tweet at %s with text %s" % (tweet.created_at, tweet.text))
         else:
             self._tweet(self, self._compose_text(self.properties.welcome_text))
 
@@ -55,7 +54,7 @@ class TwitterConnector:
                 self._try_post_tweet(text, 1)
 
     def _compose_text(self, text):
-        return  self.properties.greeting + " @" + self.properties.me + "! " + text
+        return self.properties.greeting + " @" + self.properties.me + "! " + text
 
     def _tweet(self, text):
         self.twitter.update_status(status=text)
@@ -75,7 +74,7 @@ class TwitterConnector:
             time.sleep(RECONNECTION_TIME)
             # Try to post again.
             self.connect()
-            self._try_post_tweet(new_tweet, attempt+1)
+            self._try_post_tweet(new_tweet, attempt + 1)
 
         except Exception as e:
             self._logger.error("Unexpected error posting tweet: %s" % (e))
@@ -137,21 +136,17 @@ class TwitbotReminder:
 
             connector.check_previous_tweets()
 
-            while True:
-
-                now = datetime.datetime.now()
-                self.logger.info("Processing reminders for date %s" % now)
-                reminders = self.load_reminders()
-                current_reminders = reminders.search_by_date(now.day, now.month)
-                connector.execute(current_reminders)
-
-                # Sleep iteration
-                time.sleep(EXECUTION_TIME)
+            now = datetime.datetime.now()
+            self.logger.info("Processing reminders for date %s" % now)
+            reminders = self.load_reminders()
+            current_reminders = reminders.search_by_date(now.day, now.month)
+            connector.execute(current_reminders)
 
         except Exception as e:
             self.logger.error("An exception happened caused by: %s" % e)
-            connector.disconnect()
-            sys.exit(-1)
+
+        connector.disconnect()
+        sys.exit(-1)
 
 
 class TwibotLogger:
@@ -165,8 +160,3 @@ class TwibotLogger:
         logger.addHandler(handler)
         logger.setLevel(logging.DEBUG)
         return logger
-
-
-
-
-
