@@ -1,1 +1,5 @@
 .idea/
+__pycache__/
+bin/
+venv/
+twitbot-reminder.log

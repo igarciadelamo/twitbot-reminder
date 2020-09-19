@@ -6,5 +6,6 @@
     "access-token-secret": "test-access-token-secret"
   },
   "me": "my_twitter_username",
-  "greeting" : "Hola"
+  "greeting" : "Hi",
+  "welcome-text": "This is my first message"
 }

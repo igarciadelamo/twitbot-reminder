@@ -23,7 +23,7 @@ The bot can publish the tweets through the account that created the application.
 
 ## Installation
 
-The Python package "twitter" is required.
+The Python package "tweepy" is required.
 
 This project has been developed and tested using Python3.
 
@@ -76,10 +76,12 @@ and _logdir_ is the directory where the logs
 * Tag 0.1.0: Initial version
 
 * Tag 0.2.0: 
- * Unit testing
- * Logs stored in a configurable directory
- * Reconnection to Twitter after a period of time if there is no connection
+  * Unit testing
+  * Logs stored in a configurable directory
+  * Reconnection to Twitter after a period of time if there is no connection
 
+* Tag 0.3.0: 
+  * Removing infinite loop: the program finishes after execution.
 
 ## Next steps
 
