@@ -83,11 +83,12 @@ and _logdir_ is the directory where the logs
 * Tag 0.3.0: 
   * Removing infinite loop: the program finishes after execution.
 
-## Next steps
 
-* Use a database to store the reminders.
-* Store the published tweets to avoid duplicates.
-* Answer to mentions with new tweets.
+## Periodic execution
+
+In order to launch the program every day, you can find more info in the next link:
+https://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/ 
+
 
 
 
